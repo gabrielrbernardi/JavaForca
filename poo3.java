@@ -4,14 +4,14 @@
  * Autor: 						Gabriel Ribeiro Bernardi	*
  * Matricula: 					11821BCC036					*
  * Data de inicio: 				05/09/2019					*
- * Data da ultima modificacao: 	09/09/2019					*
+ * Data da ultima modificacao:  11/09/2019					*
  * Linguagem utilizada:			Java						*
  ***********************************************************/
 package poo03;
 import java.util.Scanner;
 import java.io.IOException;
 public class poo3 {
-	public static void main(String[] args) throws IOException {					// Capturando excecao para 'pausar' o sistema quando abrir opcao 2 ou 3 do menu
+	public static void main(String[] args) throws IOException {					// Capturando excecao para 'pausar' o sistema quando abrir opcao 2 ou 3 do menu. Similar ao sleep do Python
 		Forca f = new Forca();
 		Scanner teclado = new Scanner(System.in);
 		int choose=0;
@@ -42,9 +42,9 @@ public class poo3 {
 		f.desenharForca(0);
 		f.imprimirEspacos();
 		System.out.println("Quantidade de vidas restantes: " + Math.abs(f.getQtdLetErradas() - 7));
-
 		while(true) {
 			f.verificaLetra();
+			f.cont++;
 		}
 		
 	}

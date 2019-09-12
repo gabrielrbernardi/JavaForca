@@ -4,10 +4,11 @@
  * Autor: 						Gabriel Ribeiro Bernardi	*
  * Matricula: 					11821BCC036					*
  * Data de inicio: 				05/09/2019					*
- * Data da ultima modificacao: 	09/09/2019					*
+ * Data da ultima modificacao: 	11/09/2019					*
  * Linguagem utilizada:			Java						*
  ***********************************************************/
-// Observacoes:
+// Observacoes:					Impedir que o usuario entre com uma letra repetida. Por exemplo, se entrar com a letra 'a' e possuir na
+//								palavra escolhida, impedir que digite a letra 'a' novamente
 
 package poo03;
 import java.util.Random;
@@ -30,10 +31,15 @@ public class Forca implements Interface {
 	private int tamPalEscolhida = palEscolhida.length();
 	private int qtdLetAcertadas, qtdLetErradas;
 	Scanner teclado = new Scanner(System.in);									// Lendo os dados do teclado
-	private String[] vetLetAcertadas = new String[tamPalEscolhida];
+	private String[] vetLetAcertadas = new String[this.getTamPalEscolhida()];
+	private int tamVetLetTentada = Math.abs(this.getTamPalEscolhida() - 26);
+	private String[] vetLetTentada = new String[tamVetLetTentada];
 	private int[] intVet = new int[tamPalEscolhida];
+	public int cont = 0;
 	
-		
+	/***************
+	 * CONSTRUCTOR *
+	 ***************/
 	public Forca() {
 		this.setQtdLetAcertadas(0);
 		this.setQtdLetErradas(0);
@@ -48,6 +54,9 @@ public class Forca implements Interface {
 		System.out.println("===========================");
 		System.out.print("Escolha: ");
 	}
+	/*********************
+	 * GETTERS E SETTERS *
+	 *********************/
 	public String getPalChave(int index) {
 		return palChave[index];
 	}
@@ -94,8 +103,9 @@ public class Forca implements Interface {
 		return dicaEscolhida;
 	}
 	
-	/**************************************************************************/
-	
+	/***********************
+	 * METODOS DO PROGRAMA *
+	 ***********************/
 	public void dados() {														// Imprime as palavras contidas no array
 		System.out.println(tam);
 		for(int i = 0; i < 26; i++) {
@@ -108,10 +118,11 @@ public class Forca implements Interface {
 	}
 	public int verificaLetra() {
 		int index, j = 0;
-		String letra;
+		String letra, letra1;
 		System.out.print("Letra escolhida: ");
 		letra = teclado.next();
 		letra = letra.toUpperCase();
+		letra1 = letra;
 		if(letra.contentEquals("FECHAR")) {										// Verificar se o usuario deseja fechar o jogo
 			System.out.println("Encerramento solicitado pelo usuario");
 			System.out.println("Fechando o programa");
@@ -121,7 +132,7 @@ public class Forca implements Interface {
 			index = palEscolhida.indexOf(letra);
 			vetLetAcertadas[index] = letra.valueOf(letra);
 //			System.out.println("index: " + index);
-			intVet[index] = 1;													// Com o index da letra, a posicao do array de int recebera 1, de acordo com a posicao da letra na palEscolhida
+			//intVet[index] = 1;													// Com o index da letra, a posicao do array de int recebera 1, de acordo com a posicao da letra na palEscolhida
 			while(palEscolhida.indexOf(letra) != -1 && j < tamPalEscolhida) {	// Faz a verficacao se possui mais de uma mesma letra na palavra escolhida
 				int index1;
 				if(palEscolhida.indexOf(letra, index+1) != -1) {				// Se a letra existe apenas uma vez, nao entrara na atribuicao presente dentro do loop
@@ -132,6 +143,12 @@ public class Forca implements Interface {
 				}else {
 					break;
 				}
+			}
+			try {																	// Excecao para tamanho maximo do array com letras tentadas
+				vetLetTentada[cont] = letra.valueOf(letra1);				
+			} catch (Exception e) {
+				System.out.println("Quantidade de tentativas excedidas");
+				System.exit(0);
 			}
 			imprimirEspacos();
 			System.out.println();
@@ -157,6 +174,7 @@ public class Forca implements Interface {
 		}else {
 			System.out.println("Nao contem a letra: " + letra);
 			this.setQtdLetErradas(this.getQtdLetErradas() + 1);
+			vetLetTentada[cont] = letra.valueOf(letra1);
 //			System.out.println("Quantidade de vidas restantes: " + Math.abs(this.getQtdLetErradas() - 7));
 			verificaPerder();
 			imprimirEspacos();
@@ -166,6 +184,7 @@ public class Forca implements Interface {
 		}
 	}
 	int qtdNullVetLetAcertadas;
+	
 	public int verificaGanhar() {
 //		System.out.println(tamPalEscolhida);
 		qtdNullVetLetAcertadas=0;
@@ -290,6 +309,12 @@ public class Forca implements Interface {
 				System.out.print(" _ ");
 			}else {
 				System.out.print(" " + vetLetAcertadas[j] + " ");
+			}
+		}
+		System.out.println("\nLetras ja tentadas: ");
+		for(int j = 0; j < tamVetLetTentada; j++) {
+			if(vetLetTentada[j] != null) {
+				System.out.print(" " + vetLetTentada[j]);
 			}
 		}
 		System.out.println();
