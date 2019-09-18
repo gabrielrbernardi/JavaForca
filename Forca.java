@@ -5,7 +5,7 @@
  * Matricula: 					11821BCC036					*
  * Data de inicio: 				05/09/2019					*
  * Data da ultima modificacao: 	18/09/2019					*
- * Dias de desenvolvimento:     08/09/2019                  *
+ * Dias de desenvolvimento:     08                          *
  * Linguagem utilizada:			Java						*
  ***********************************************************/
 
@@ -23,8 +23,8 @@ public class Forca implements Interface {
 			"ANIMAL"};
 	private int tam = palChave.length;											// Recebendo a quantidade de palavras contidas no array
 	private Random gerador = new Random(); 										// Criando objeto da classe Random
-	int pal = gerador.nextInt(26);												// Gerando um numero aleatorio entre 0 e 25
-//	int pal = 12;																// Chave de teste para palavras especificas
+//	int pal = gerador.nextInt(26);												// Gerando um numero aleatorio entre 0 e 25
+	int pal = 1;																// Chave de teste para palavras especificas
 	private String palEscolhida = palChave[pal];								// A partir do numero gerado, a palavra sera escolhida pelo indice gerado
 	private String dicaEscolhida = dicaPalChave[pal];							// Selecionando a dica conforme palavra escolhida
 	private int tamPalEscolhida = palEscolhida.length();

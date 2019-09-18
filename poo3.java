@@ -5,7 +5,7 @@
  * Matricula: 					11821BCC036					*
  * Data de inicio: 				05/09/2019					*
  * Data da ultima modificacao: 	18/09/2019					*
- * Dias de desenvolvimento:     08/09/2019                  *
+ * Dias de desenvolvimento:     08                          *
  * Linguagem utilizada:			Java						*
  ***********************************************************/
 
